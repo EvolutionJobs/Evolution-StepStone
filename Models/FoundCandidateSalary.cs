@@ -1,4 +1,4 @@
-﻿namespace EvoApi.Services.StepStone.Models
+﻿namespace Evolution.StepStone.Models
 {
     public sealed class FoundCandidateSalary
     {

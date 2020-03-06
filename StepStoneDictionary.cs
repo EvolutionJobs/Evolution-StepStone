@@ -1,4 +1,4 @@
-﻿namespace EvoApi.Services.StepStone
+﻿namespace Evolution.StepStone
 {
     public enum StepStoneDictionary
     {

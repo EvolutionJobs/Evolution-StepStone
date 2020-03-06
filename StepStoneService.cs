@@ -1,7 +1,7 @@
-﻿namespace EvoApi.Services.StepStone
+﻿namespace Evolution.StepStone
 {
-    using EvoApi.Services.Serialisation;
-    using EvoApi.Services.StepStone.Models;
+    using Evolution.Serialisation;
+    using Evolution.StepStone.Models;
     using Microsoft.Extensions.Logging;
     using Newtonsoft.Json;
     using System;

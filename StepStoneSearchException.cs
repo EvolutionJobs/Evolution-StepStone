@@ -1,6 +1,6 @@
-﻿namespace EvoApi.Services.StepStone
+﻿namespace Evolution.StepStone
 {
-    using EvoApi.Services.StepStone.Models;
+    using Evolution.StepStone.Models;
     using System;
     using System.Net;
 
