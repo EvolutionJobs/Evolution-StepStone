@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>keith.henry@evolutionjobs.co.uk</Authors>
+    <Company>Evolution</Company>
+    <Product>StepStone API</Product>
+    <Description>API for connecting to StepStone's candidate search</Description>
+    <RootNamespace>Evolution.StepStone</RootNamespace>
+    <AssemblyName>Evolution.StepStone</AssemblyName>
+  </PropertyGroup>
+
+</Project>
