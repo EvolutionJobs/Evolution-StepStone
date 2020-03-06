@@ -99,8 +99,17 @@ The results will include anonymised candidates, and you can use the `Id` propert
 
 There are two methods, `Candidate` gets the same structure as search, but with contact details, `CV` gets the CV  file as a collection of `byte`:
 
-```
+```c#
 var candidate = await stepStone.Candidate(token, "brand name", id);
 var cv = await stepStone.CV(token, "brand name", id);
 ```
 
+Calling either of these will reduce quota by one unless the candidate is already recently purchased.
+
+### Exceptions
+
+Three kinds of exceptions:
+
+- `StepStoneAuthenticationException` if thrown by `Authenticate` this means invalid credentials, otherwise it means the current token has expired.
+- `StepStoneServiceException` issues with the service or gateway, generally 500 status errors.
+- `StepStoneSearchException` issues with the search request object, containing the response message from the API.
