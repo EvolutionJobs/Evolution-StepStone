@@ -49,9 +49,11 @@ var token = await stepStone.Authenticate("your username", "your session key");
 
 This token can be re-used for up to `token.Expires` in seconds.
 
-This token will hold the keys for all the services configured.
+This token will hold the keys for all the services configured and is unique to the user, it should not be shared between users.
 
-### Authentication Errors
+The username and session key are passed in the header for every request - they can be anything, but should uniquely identify the application user.
+
+#### Authentication Errors
 
 Authentication can time out and will throw a `StepStoneAuthenticationException` if a request is made with an outdated token.
 
@@ -75,6 +77,8 @@ catch (StepStoneAuthenticationException authEx)
 }
 ```
 
+Don't use this pattern for the `Authenticate` method, as in that context `StepStoneAuthenticationException` means your credentials are incorrect.
+
 ### Quotas
 To check a quota pass the token and the name (if configured) or the `https://recruiter.{StepStone brand site}`:
 
@@ -91,7 +95,19 @@ SearchRequest request = /* Build search request object */;
 var searchResults = await stepStone.Search(token, "brand name", request);
 // OR, the last 2 flags are optional
 var searchResults = await stepStone.Search(token, "brand name", request, includeFacets, includeCandidatesActivity);
+
+int resultCount = searchResults.TotalResultsCount;
+
+// If includeFacets: true passed to Search
+var facets = searchResults.Facets;
+
+foreach(var candidate in searchResults.Candidates) {
+    // Unique ID to get the candidate's contact details or CV
+    var id = candidate.Id;
+}
 ```
+
+The `Search` method will attempt to resolve invalid requests, for instance if you pass a salary filter and a salary facet the facet will be removed. When these validation changes are made the `ILoggerFactory` will log a warning.
 
 The results will include anonymised candidates, and you can use the `Id` property to fetch the full version.
 
@@ -108,7 +124,7 @@ Calling either of these will reduce quota by one unless the candidate is already
 
 ### Exceptions
 
-Three kinds of exceptions:
+Three kinds of expected exceptions can be thrown:
 
 - `StepStoneAuthenticationException` if thrown by `Authenticate` this means invalid credentials, otherwise it means the current token has expired.
 - `StepStoneServiceException` issues with the service or gateway, generally 500 status errors.
